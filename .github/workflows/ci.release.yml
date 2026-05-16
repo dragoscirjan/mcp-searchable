@@ -103,7 +103,7 @@ jobs:
           fi
 
           echo "Publishing $TARBALL"
-          npm publish "$TARBALL" --access public
+          npm publish "./$TARBALL" --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
