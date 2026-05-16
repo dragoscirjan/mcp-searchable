@@ -108,7 +108,7 @@ depends = ["deps:sync:mise", "deps:sync:npm", "deps:sync:uv"]
 run = "mise install --yes"
 
 [tasks."deps:sync:npm"]
-run = "npm install"
+run = "npm ci"
 
 [tasks."deps:sync:uv"]
 run = "uv sync"
