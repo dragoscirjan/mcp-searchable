@@ -9,25 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Bug Fixes
 
-* updated readme ([d13978f](https://github.com/templ-project/typescript/commit/d13978f4bdba9cdd1b375f2b99ba8c3cf05d1154))
+- updated readme ([d13978f](https://github.com/templ-project/typescript/commit/d13978f4bdba9cdd1b375f2b99ba8c3cf05d1154))
 
 ## 1.3.0 (2025-12-30)
 
 ### Features
 
-* **typescript:** refactor Taskfile into modular includes structure ([2da4d66](https://github.com/templ-project/typescript/commit/2da4d66197ad2bff732194dce2c2044b305f2510))
+- **typescript:** refactor Taskfile into modular includes structure ([2da4d66](https://github.com/templ-project/typescript/commit/2da4d66197ad2bff732194dce2c2044b305f2510))
 
 ## 1.2.0 (2025-12-21)
 
 ### Features
 
-* sync Python/PowerShell/Shell tooling from generic template ([baa8e07](https://github.com/templ-project/typescript/commit/baa8e07ad20e61eafcdc11340cd71fd263bfe459))
+- sync Python/PowerShell/Shell tooling from generic template ([baa8e07](https://github.com/templ-project/typescript/commit/baa8e07ad20e61eafcdc11340cd71fd263bfe459))
 
 ## 1.1.1 (2025-12-20)
 
 ### Bug Fixes
 
-* sort all config files alphabetically for consistency and maintainability ([a473251](https://github.com/templ-project/typescript/commit/a473251a8b7cd96e1fc31554eca88f8ecbd2d624))
+- sort all config files alphabetically for consistency and maintainability ([a473251](https://github.com/templ-project/typescript/commit/a473251a8b7cd96e1fc31554eca88f8ecbd2d624))
 
 ## 1.1.0 (2025-12-19)
 

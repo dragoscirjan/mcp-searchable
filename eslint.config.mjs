@@ -21,6 +21,7 @@ export default [
       'node_modules/**',
       'package-lock.json',
       'package.json',
+      'site/**',
       'tsconfig*.json',
       'typedoc*.json',
     ],

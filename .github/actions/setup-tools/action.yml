@@ -16,14 +16,6 @@ runs:
   using: 'composite'
   steps:
     # ==========================================================================
-    # Task
-    # ==========================================================================
-    - name: Setup Task
-      env:
-        GITHUB_TOKEN: ${{ inputs.github-token }}
-      uses: go-task/setup-task@v1
-
-    # ==========================================================================
     # Mise Installation
     # ==========================================================================
     - name: Install Mise (Unix)
@@ -49,7 +41,7 @@ runs:
     - name: Restore Mise downloads cache (Unix)
       id: mise-downloads-cache-unix
       if: runner.os != 'Windows'
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v5
       with:
         key: mise-downloads-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('mise.lock') }}-${{ inputs.cache-version }}
         restore-keys: |
@@ -60,7 +52,7 @@ runs:
     - name: Restore Mise downloads cache (Windows)
       id: mise-downloads-cache-windows
       if: runner.os == 'Windows'
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v5
       with:
         key: mise-downloads-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('mise.lock') }}-${{ inputs.cache-version }}
         restore-keys: |
@@ -75,7 +67,7 @@ runs:
     - name: Restore Mise installs cache (Unix)
       id: mise-installs-cache-unix
       if: runner.os != 'Windows'
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v5
       with:
         key: mise-installs-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('mise.lock') }}-${{ inputs.cache-version }}
         restore-keys: |
@@ -86,7 +78,7 @@ runs:
     - name: Restore Mise installs cache (Windows)
       id: mise-installs-cache-windows
       if: runner.os == 'Windows'
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v5
       with:
         key: mise-installs-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('mise.lock') }}-${{ inputs.cache-version }}
         restore-keys: |
@@ -99,7 +91,7 @@ runs:
     # ==========================================================================
     - name: Restore Python venv cache
       id: venv-cache
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v5
       with:
         key: venv-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('uv.lock') }}-${{ inputs.cache-version }}
         restore-keys: |
@@ -111,7 +103,7 @@ runs:
     # ==========================================================================
     - name: Restore Node modules cache
       id: node-cache
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v5
       with:
         key: node-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package-lock.json') }}-${{ inputs.cache-version }}
         restore-keys: |
@@ -147,7 +139,7 @@ runs:
       run: |
         echo "::group::Syncing all dependencies (cache miss or refresh requested)"
         export ACTION=$([ "${{ inputs.refresh-deps }}" = "true" ] && echo "refresh" || echo "sync")
-        task deps:$ACTION
+        mise run deps:$ACTION
         echo "::endgroup::"
 
     - name: Sync Dependencies (cache hit - npm/uv only)
@@ -168,12 +160,12 @@ runs:
 
         export ACTION=$([ "${{ inputs.refresh-deps }}" = "true" ] && echo "refresh" || echo "sync")
 
-        task deps:$ACTION:mise
+        mise run deps:$ACTION:mise
 
         # Only sync npm if node_modules cache missed
         if [ "${{ steps.node-cache.outputs.cache-hit }}" != "true" ]; then
           echo "Node modules cache miss - running npm install"
-          task deps:$ACTION:npm
+          mise run deps:$ACTION:npm
         else
           echo "Node modules cache hit - skipping npm install"
         fi
@@ -181,7 +173,7 @@ runs:
         # Only sync uv if venv cache missed
         if [ "${{ steps.venv-cache.outputs.cache-hit }}" != "true" ]; then
           echo "Python venv cache miss - running uv sync"
-          task deps:$ACTION:uv
+          mise run deps:$ACTION:uv
         else
           echo "Python venv cache hit - skipping uv sync"
         fi
@@ -194,7 +186,7 @@ runs:
       if: |
         runner.os != 'Windows' &&
         steps.mise-downloads-cache-unix.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v5
       with:
         key: mise-downloads-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('mise.lock') }}-${{ inputs.cache-version }}
         path: |
@@ -204,7 +196,7 @@ runs:
       if: |
         runner.os == 'Windows' &&
         steps.mise-downloads-cache-windows.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v5
       with:
         key: mise-downloads-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('mise.lock') }}-${{ inputs.cache-version }}
         path: |
@@ -214,7 +206,7 @@ runs:
       if: |
         runner.os != 'Windows' &&
         steps.mise-installs-cache-unix.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v5
       with:
         key: mise-installs-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('mise.lock') }}-${{ inputs.cache-version }}
         path: |
@@ -224,7 +216,7 @@ runs:
       if: |
         runner.os == 'Windows' &&
         steps.mise-installs-cache-windows.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v5
       with:
         key: mise-installs-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('mise.lock') }}-${{ inputs.cache-version }}
         path: |
@@ -232,14 +224,14 @@ runs:
 
     - name: Save Python venv cache
       if: steps.venv-cache.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v5
       with:
         key: venv-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('uv.lock') }}-${{ inputs.cache-version }}
         path: .venv
 
     - name: Save Node modules cache
       if: steps.node-cache.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v5
       with:
         key: node-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package-lock.json') }}-${{ inputs.cache-version }}
         path: node_modules

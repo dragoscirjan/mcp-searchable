@@ -28,19 +28,6 @@ jobs:
           #   {"runs-on":"ubuntu-latest"}
           # ]' | tr -d '\n' | tr -s ' ' >> $GITHUB_OUTPUT
 
-  test-scaffold:
-    name: Test Scaffold
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup-tools
-      - name: Test bootstrap help
-        run: mise exec -- npx --yes . bootstrap --help
-      - name: Test bootstrap execution
-        run: mise exec -- npx --yes . bootstrap ./test-project
-      - name: Test bootstrap execution (remote)
-        run: mise exec -- npx --yes --package=github:${{ github.repository }} bootstrap ./test-project-remote
-
   # Validation & Build matrix for different platforms
   # Option A: build,lint,test before version bump (slower, but validates before release)
   # Option B: lint,test only before version bump (faster, build happens at release time)
@@ -125,3 +112,6 @@ jobs:
     with:
       tag: ${{ needs.version-detect.outputs.tag }}
       prerelease: false
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}

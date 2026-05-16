@@ -15,7 +15,17 @@ requires = ["hatchling"]
 packages = [".scripts"]
 
 [dependency-groups]
-dev = ["black>=24.0.0", "mypy>=1.10.0", "pylint>=3.0.0", "pytest>=8.0.0", "ruff>=0.4.0"]
+dev = [
+  "black>=24.0.0",
+  "mkdocs>=1.6.1",
+  "mkdocs-material>=9.7.6",
+  "mkdocs-minify-plugin>=0.8.0",
+  "mypy>=1.10.0",
+  "pylint>=3.0.0",
+  "pymdown-extensions>=10.21.3",
+  "pytest>=8.0.0",
+  "ruff>=0.4.0",
+]
 
 # =============================================================================
 # Black Configuration

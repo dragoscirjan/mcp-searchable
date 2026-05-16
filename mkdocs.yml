@@ -1,0 +1,61 @@
+site_name: mcp-searchable
+site_description: Smart Web Extraction MCP server for search, fetch, stash, grep, and local Q&A
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.path
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Setup with LLMs: getting-started/llm-setup.md
+      - Usage: guide/usage.md
+  - Reference:
+      - MCP Tools: reference/tools.md
+      - Environment Variables: reference/environment-variables.md
+  - Project:
+      - Troubleshooting: possible-problems.md
+      - Contributing: project/contributing.md
+      - Changelog: project/changelog.md
+      - Donate: donate.md

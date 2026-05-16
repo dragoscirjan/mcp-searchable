@@ -1,3 +1,8 @@
-task lint-staged duplicate-check license-check audit-check
+#!/bin/sh
 
-git add .
+npx lint-staged
+npm run duplicate-check
+npm run license-check
+npm audit --audit-level=moderate || true
+
+git add .jscpd/jscpd-badge.svg 2>/dev/null || true

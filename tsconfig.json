@@ -4,9 +4,10 @@
     "declaration": true,
     "declarationMap": true,
     "lib": ["ES2020"],
-    "outDir": "./dist/esm",
+    "outDir": "./dist",
     "rootDir": "./src",
-    "sourceMap": true
+    "sourceMap": true,
+    "ignoreDeprecations": "6.0"
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "coverage", "dist", "node_modules"],
   "include": ["src/**/*.ts"]

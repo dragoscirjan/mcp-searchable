@@ -1,10 +1,10 @@
 '*.{cjs,js,json,jsx,mjs,ts,tsx,yaml,yml}':
-  - task eslint -- --fix
-  - task prettier -- --write
+  - eslint --fix
+  - prettier --write
 '*.ps1':
-  - task pwshlint_py -- --fix
+  - uv run .scripts/pwshlint.py --fix
 '*.py':
-  - task pylint --
-  - task ruff -- format
+  - uv run pylint
+  - uv run ruff format
 '*.sh':
-  - task shlint_py -- --fix
+  - python .scripts/shlint.py --fix

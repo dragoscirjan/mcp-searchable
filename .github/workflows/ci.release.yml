@@ -12,6 +12,18 @@ on:
         required: false
         type: boolean
         default: false
+      skip_build:
+        description: Skip build (use existing artifact from same workflow run)
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      NPM_TOKEN:
+        description: npm token used to publish package
+        required: true
+      GH_TOKEN:
+        description: token used to push docs to Pages repository
+        required: true
   workflow_dispatch:
     inputs:
       tag:
@@ -56,6 +68,12 @@ jobs:
           ref: ${{ inputs.tag }}
           fetch-depth: 0
 
+      - name: Setup Node.js for npm publish
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+
       - name: Download build artifact
         uses: actions/download-artifact@v7
         with:
@@ -75,12 +93,19 @@ jobs:
             echo "Release ${{ inputs.tag }}" > CHANGELOG.md
           fi
 
-      # - name: Publish to NPM
-      #   run: |
-      #     echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN_W }}" > ~/.npmrc
-      #     npm publish --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_W }}
+      - name: Publish to npm
+        shell: bash
+        run: |
+          TARBALL=$(find release-assets -maxdepth 1 -name '*.tgz' | head -n 1)
+          if [ -z "$TARBALL" ]; then
+            echo "No npm tarball found in release-assets/"
+            exit 1
+          fi
+
+          echo "Publishing $TARBALL"
+          npm publish "$TARBALL" --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
@@ -93,3 +118,48 @@ jobs:
           files: release-assets/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  docs:
+    name: Build & Deploy Docs
+    runs-on: ubuntu-latest
+    needs: [release]
+    if: always() && needs.release.result == 'success'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.tag }}
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Build MkDocs
+        run: |
+          uv sync
+          uv run mkdocs build --strict
+
+      - name: Checkout GitHub Pages repository
+        uses: actions/checkout@v6
+        with:
+          repository: dragoscirjan/dragoscirjan.github.io
+          ref: main
+          token: ${{ secrets.GH_TOKEN }}
+          path: docs-repo
+
+      - name: Deploy docs to mcp-searchable subfolder
+        shell: bash
+        run: |
+          rm -rf docs-repo/mcp-searchable
+          cp -R site docs-repo/mcp-searchable
+
+          cd docs-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add mcp-searchable
+
+          if git diff --staged --quiet; then
+            echo "No documentation changes to deploy."
+          else
+            git commit -m "docs(mcp-searchable): update documentation site"
+            git push origin main
+          fi

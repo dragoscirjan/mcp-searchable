@@ -12,7 +12,7 @@
   - [What's Included](#whats-included)
   - [Common Commands](#common-commands)
     - [Using npm](#using-npm)
-    - [Using Taskfile (Recommended)](#using-taskfile-recommended)
+    - [Using mise tasks (Recommended)](#using-taskfile-recommended)
   - [Requirements](#requirements)
   - [Setup Development Environment](#setup-development-environment)
   - [Project Structure](#project-structure)
@@ -39,6 +39,37 @@ npm test
 
 That's it! You now have a fully configured TypeScript project.
 
+## MCP Search Providers
+
+The `web_search` MCP tool supports multiple providers via the optional `provider` argument:
+
+- `duckduckgo` (default)
+- `google` (Google Custom Search JSON API)
+- `bing` (Bing Web Search API)
+- `brave` (Brave Search API)
+
+### Tool input
+
+```json
+{
+  "query": "model context protocol",
+  "provider": "google",
+  "limit": 5
+}
+```
+
+### Required environment variables
+
+- `GOOGLE_API_KEY` and `GOOGLE_CSE_ID` for `provider=google`
+- `BING_API_KEY` for `provider=bing`
+- `BRAVE_API_KEY` for `provider=brave`
+
+Optional:
+
+- `BING_API_ENDPOINT` (override default Bing endpoint)
+
+You can copy `.env.example` and fill in your provider keys.
+
 ### Bootstrap Options
 
 ```bash
@@ -56,22 +87,22 @@ See [.npx-install/README.md](.npx-install/README.md) for detailed bootstrap docu
 
 ## What's Included
 
-| Feature                 | Tool                                                                                              | Description                        |
-| ----------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| **Language**            | [TypeScript 5.9](https://www.typescriptlang.org/)                                                 | Type-safe JavaScript               |
-| **Runtime**             | [Node.js 22+](https://nodejs.org/)                                                                | Modern JavaScript runtime          |
-| **Execution**           | [tsx](https://github.com/privatenumber/tsx)                                                       | TypeScript execution without build |
-| **Module System**       | ESM                                                                                               | Native ES Modules                  |
-| **Build System**        | [tsc](https://www.typescriptlang.org/) + [esbuild](https://esbuild.github.io/)                    | Type-check + fast bundling         |
-| **Test Framework**      | [Vitest](https://vitest.dev/)                                                                     | Fast unit testing with V8 coverage |
-| **Linting**             | [ESLint](https://eslint.org/)                                                                     | Code quality with TypeScript rules |
-| **Formatting**          | [Prettier](https://prettier.io/)                                                                  | Consistent code formatting         |
-| **Documentation**       | [TypeDoc](https://typedoc.org/)                                                                   | API docs from TypeScript           |
-| **Task Runner**         | [Taskfile](https://taskfile.dev/)                                                                 | Modern build automation            |
-| **Tool Management**     | [mise](https://mise.jdx.dev/)                                                                     | Isolated development environment   |
-| **Pre-commit Hooks**    | [Husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/okonet/lint-staged) | Automatic validation               |
-| **Duplicate Detection** | [jscpd](https://github.com/kucherenko/jscpd)                                                      | Copy-paste detector                |
-| **CI/CD**               | GitHub Actions                                                                                    | Multi-platform testing & releases  |
+| Feature                 | Tool                                                                                                    | Description                        |
+| ----------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **Language**            | [TypeScript 5.9](https://www.typescriptlang.org/)                                                       | Type-safe JavaScript               |
+| **Runtime**             | [Node.js 22+](https://nodejs.org/)                                                                      | Modern JavaScript runtime          |
+| **Execution**           | [tsx](https://github.com/privatenumber/tsx)                                                             | TypeScript execution without build |
+| **Module System**       | ESM                                                                                                     | Native ES Modules                  |
+| **Build System**        | [tsc](https://www.typescriptlang.org/) + [esbuild](https://esbuild.github.io/)                          | Type-check + fast bundling         |
+| **Test Framework**      | [Vitest](https://vitest.dev/)                                                                           | Fast unit testing with V8 coverage |
+| **Linting**             | [ESLint](https://eslint.org/)                                                                           | Code quality with TypeScript rules |
+| **Formatting**          | [Prettier](https://prettier.io/)                                                                        | Consistent code formatting         |
+| **Documentation**       | [MkDocs](https://www.mkdocs.org/) + [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) | Project documentation site         |
+| **Task Runner**         | [mise tasks](https://mise.jdx.dev/tasks/)                                                               | Modern build automation            |
+| **Tool Management**     | [mise](https://mise.jdx.dev/)                                                                           | Isolated development environment   |
+| **Pre-commit Hooks**    | [Husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/okonet/lint-staged)       | Automatic validation               |
+| **Duplicate Detection** | [jscpd](https://github.com/kucherenko/jscpd)                                                            | Copy-paste detector                |
+| **CI/CD**               | GitHub Actions                                                                                          | Multi-platform testing & releases  |
 
 ## Common Commands
 
@@ -84,50 +115,30 @@ npm run test:coverage  # Run tests with coverage
 npm run lint           # Lint and auto-fix
 npm run format         # Format code with Prettier
 npm run build          # Build for production
-npm run docs           # Generate TypeDoc documentation
+npm run docs           # Build MkDocs site (strict)
 npm run validate       # Run all quality checks
 ```
 
-### Using Taskfile (Recommended)
+### Using mise tasks (Recommended)
 
 ```bash
 # === Development ===
-task run                 # Run the application (via tsx)
-task build               # Build for production
-task build:all           # Build all formats (ESM, CJS, IIFE, Browser)
-
-# === Code Formatting ===
-task format              # Format all code (Prettier)
-task format:check        # Check formatting without fixing
-
-# === Linting ===
-task lint                # Lint all code (ESLint + TypeScript)
-task lint:check          # Check all without fixing
-
-# === Testing ===
-task test                # Run all tests
-task test:coverage       # Run tests with coverage report
-
-# === Code Quality ===
-task duplicate-check     # Check for duplicate code
-
-# === Documentation ===
-task docs                # Build TypeDoc documentation
-task docs:serve          # Serve documentation locally
-
-# === Full Validation ===
-task validate            # Run complete CI pipeline locally
-
-# === Dependencies ===
-task deps:sync           # Install all dependencies (mise, npm)
-task deps:refresh        # Update all dependencies
-task deps:clean          # Remove all dependencies
+mise run run              # Run the application (via node)
+mise run format            # Format all code (Prettier)
+mise run format:check      # Check formatting without fixing
+mise run lint              # Lint all code (ESLint + TypeScript)
+mise run lint:check        # Check all without fixing
+mise run duplicate-check   # Check for duplicate code
+mise run docs              # Build MkDocs site (strict)
+mise run docs:serve        # Serve documentation locally
+mise run deps:sync         # Install all dependencies (mise, npm)
+mise run deps:refresh      # Update all dependencies
+mise run deps:clean        # Remove all dependencies
 ```
 
 ## Requirements
 
 - [mise](https://mise.jdx.dev/) - Tool version management (installs everything else)
-- [Task](https://taskfile.dev/) - Task runner (can be installed via mise or standalone)
 
 **Automatically installed via mise:**
 
@@ -147,18 +158,18 @@ curl https://mise.run | sh
 winget install jdx.mise
 # or: choco install mise
 
-# Install Task runner
-# https://taskfile.dev/installation/
+# Install project tools and node modules
+
 
 # Clone and setup
 git clone https://github.com/templ-project/typescript.git my-project
 cd my-project
 
 # Install all dependencies
-task deps:sync
+mise run deps:sync
 
 # Verify setup
-task validate
+mise run validate
 ```
 
 ## Project Structure
@@ -168,22 +179,22 @@ task validate
 │   └── workflows/        # CI/CD pipelines
 ├── .husky/               # Git hooks
 ├── .scripts/             # Build/lint helper scripts
-├── .taskfiles/           # Shared Taskfile modules
+
 ├── src/
 │   ├── index.ts          # Main entry point
 │   └── lib/
 │       ├── greeter.ts    # Example module with TypeScript types
 │       └── greeter.spec.ts # Unit tests (co-located)
 ├── dist/                 # Build output (gitignored)
-├── docs/                 # Generated documentation
-├── Taskfile.yml          # Task definitions
+├── docs/                 # MkDocs source pages
+├── mise.toml             # Configuration and tasks
 ├── .mise.toml            # Tool versions & hooks
 ├── package.json          # Node.js dependencies
 ├── tsconfig.json         # TypeScript configuration
 ├── vitest.config.ts      # Test configuration
 ├── eslint.config.mjs     # ESLint configuration
 ├── prettier.config.mjs   # Prettier configuration
-└── typedoc.json          # TypeDoc configuration
+└── mkdocs.yml            # MkDocs configuration
 ```
 
 ## Building
@@ -194,17 +205,14 @@ The template uses a two-step build process:
 2. **esbuild** - Bundles for multiple targets
 
 ```bash
-task build
+npm run build
 # or: npm run build
 ```
 
 Outputs:
 
-- `dist/esm/` - ES Modules (for Node.js and modern bundlers)
-- `dist/cjs/` - CommonJS (for older Node.js)
-- `dist/iife/` - Browser bundle (for direct `<script>` usage)
-- `dist/browser/` - Optimized browser ESM
-- `dist/types/` - TypeScript declaration files
+- `dist/index.js` - Node.js ESM build artifact
+- `dist/index.d.ts` - TypeScript declaration file
 
 ## Testing
 
@@ -225,8 +233,8 @@ describe("hello", () => {
 Run tests:
 
 ```bash
-task test                # Run all tests
-task test:coverage       # Run with coverage report
+npm run test                # Run all tests
+npm run test:coverage       # Run with coverage report
 ```
 
 ## Code Quality
@@ -258,12 +266,12 @@ All configuration uses shared packages for consistency:
 | File                  | Purpose                                               |
 | --------------------- | ----------------------------------------------------- |
 | `.mise.toml`          | Tool versions (Node, Python, ShellCheck)              |
-| `Taskfile.yml`        | Task definitions                                      |
+| `mise.toml`           | Configuration and tasks                               |
 | `tsconfig.json`       | TypeScript config (extends `@templ-project/tsconfig`) |
 | `eslint.config.mjs`   | ESLint config (uses `@templ-project/eslint`)          |
 | `prettier.config.mjs` | Prettier config (uses `@templ-project/prettier`)      |
 | `vitest.config.ts`    | Vitest test configuration                             |
-| `typedoc.json`        | TypeDoc documentation settings                        |
+| `mkdocs.yml`          | MkDocs site navigation and theme settings             |
 | `.jscpd.json`         | Duplicate detection settings                          |
 | `.licensee.json`      | License compliance settings                           |
 
@@ -278,16 +286,8 @@ console.log(greeting); // "Hello, World!"
 ```
 
 ```javascript
-// CommonJS
-const { hello } = require("@templ-project/typescript-template");
-```
-
-```html
-<!-- Browser (after npm run build) -->
-<script src="./dist/iife/your-lib.min.js"></script>
-<script>
-  console.log(YourLib.hello("World"));
-</script>
+// ESM from built output
+import { hello } from "./dist/index.js";
 ```
 
 ## CI/CD Pipeline

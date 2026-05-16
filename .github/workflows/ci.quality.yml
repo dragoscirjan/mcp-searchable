@@ -23,12 +23,14 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-tools
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PYTHONIOENCODING: utf-8
-        run: task build
+        run: mise run build
         shell: bash
 
       - name: Get project info
@@ -57,9 +59,9 @@ jobs:
           mise exec -- npm pack
           mv *.tgz dist/
 
-          # Create dist tarball if dist directory exists
-          if [ -d dist/esm ] || [ -d dist/cjs ]; then
-            tar -czf "dist/${NAME}-${VERSION}-dist.tar.gz" dist/esm dist/cjs dist/browser dist/iife 2>/dev/null || true
+          # Create dist tarball if compiled output exists
+          if [ -f dist/index.js ]; then
+            tar -czf "dist/${NAME}-${VERSION}-dist.tar.gz" dist/index.js dist/index.d.ts dist/index.d.ts.map dist/index.js.map 2>/dev/null || true
             echo "Created distribution archive"
           fi
 
@@ -80,17 +82,19 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-tools
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check Code Formatting
         env:
           PYTHONIOENCODING: utf-8
-        run: task format:check
+        run: mise run format:check
         shell: bash
 
       - name: Lint Code
         env:
           PYTHONIOENCODING: utf-8
-        run: task lint:check
+        run: mise run lint:check
         shell: bash
 
   test:
@@ -100,18 +104,20 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-tools
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run Tests
         env:
           PYTHONIOENCODING: utf-8
-        run: task test
+        run: mise run test
         shell: bash
 
       - name: Run Tests with Coverage
         if: inputs.runs-on == 'ubuntu-latest'
         env:
           PYTHONIOENCODING: utf-8
-        run: task test:coverage
+        run: mise run test:coverage
         shell: bash
 
   duplicate-check:
