@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.1 (2026-05-16)
+
+### Bug Fixes
+
+- first release? ([0d86d8e](https://github.com/dragoscirjan/mcp-searchable/commit/0d86d8e72bb86469e7fc4ecb12e286c3913371ea))
+
 ## 1.3.1 (2026-01-03)
 
 ### Bug Fixes
