@@ -75,7 +75,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Download build artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: dist-archives
           path: release-assets
@@ -108,7 +108,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ inputs.tag }}
           name: Release ${{ inputs.tag }}
@@ -131,7 +131,7 @@ jobs:
           ref: ${{ inputs.tag }}
 
       - name: Setup uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7
 
       - name: Build MkDocs
         run: |
