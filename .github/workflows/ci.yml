@@ -18,15 +18,16 @@ jobs:
       - name: Set matrix
         id: set-matrix
         run: |
-          echo 'platforms=[
-            {"runs-on":"ubuntu-latest"},
-            {"runs-on":"macos-latest"},
-            {"runs-on":"windows-latest"}
-          ]' | tr -d '\n' | tr -s ' ' >> $GITHUB_OUTPUT
-          # use below version to test single platform, before expanding matrix
+          # use below version to test multiple platforms
           # echo 'platforms=[
-          #   {"runs-on":"ubuntu-latest"}
+          #   {"runs-on":"ubuntu-latest"},
+          #   {"runs-on":"macos-latest"},
+          #   {"runs-on":"windows-latest"}
           # ]' | tr -d '\n' | tr -s ' ' >> $GITHUB_OUTPUT
+          # use below version to test single platform, before expanding matrix
+          echo 'platforms=[
+            {"runs-on":"ubuntu-latest"}
+          ]' | tr -d '\n' | tr -s ' ' >> $GITHUB_OUTPUT
 
   # Validation & Build matrix for different platforms
   # Option A: build,lint,test before version bump (slower, but validates before release)
