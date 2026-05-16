@@ -4,7 +4,7 @@
     "codeindex_cocoindex": {
       "enabled": true
     },
-    "mcp-searchable-dev": {
+    "dev_mcp-searchable": {
       "type": "local",
       "command": ["node", "dist/index.js"],
       "enabled": true

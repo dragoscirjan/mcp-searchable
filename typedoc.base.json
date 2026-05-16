@@ -13,7 +13,7 @@
     "includeGroups": true
   },
   "navigationLinks": {
-    "GitHub": "https://github.com/templ-project/typescript"
+    "GitHub": "https://github.com/dragoscirjan/mcp-searchable"
   },
   "out": "docs-html",
   "plugin": [],

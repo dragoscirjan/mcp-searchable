@@ -21,37 +21,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Bug Fixes
 
-- updated readme ([d13978f](https://github.com/templ-project/typescript/commit/d13978f4bdba9cdd1b375f2b99ba8c3cf05d1154))
+- updated readme ([d13978f](https://github.com/dragoscirjan/mcp-searchable/commit/d13978f4bdba9cdd1b375f2b99ba8c3cf05d1154))
 
 ## 1.3.0 (2025-12-30)
 
 ### Features
 
-- **typescript:** refactor Taskfile into modular includes structure ([2da4d66](https://github.com/templ-project/typescript/commit/2da4d66197ad2bff732194dce2c2044b305f2510))
+- **typescript:** refactor Taskfile into modular includes structure ([2da4d66](https://github.com/dragoscirjan/mcp-searchable/commit/2da4d66197ad2bff732194dce2c2044b305f2510))
 
 ## 1.2.0 (2025-12-21)
 
 ### Features
 
-- sync Python/PowerShell/Shell tooling from generic template ([baa8e07](https://github.com/templ-project/typescript/commit/baa8e07ad20e61eafcdc11340cd71fd263bfe459))
+- sync Python/PowerShell/Shell tooling from generic template ([baa8e07](https://github.com/dragoscirjan/mcp-searchable/commit/baa8e07ad20e61eafcdc11340cd71fd263bfe459))
 
 ## 1.1.1 (2025-12-20)
 
 ### Bug Fixes
 
-- sort all config files alphabetically for consistency and maintainability ([a473251](https://github.com/templ-project/typescript/commit/a473251a8b7cd96e1fc31554eca88f8ecbd2d624))
+- sort all config files alphabetically for consistency and maintainability ([a473251](https://github.com/dragoscirjan/mcp-searchable/commit/a473251a8b7cd96e1fc31554eca88f8ecbd2d624))
 
 ## 1.1.0 (2025-12-19)
 
 ### Features
 
-- align workflows with generic template, fix npx bootstrap installer ([8e2c30e](https://github.com/templ-project/typescript/commit/8e2c30ee78cf5b24864ef59f86f4cea6e37dd88c))
+- align workflows with generic template, fix npx bootstrap installer ([8e2c30e](https://github.com/dragoscirjan/mcp-searchable/commit/8e2c30ee78cf5b24864ef59f86f4cea6e37dd88c))
 
 ## 1.0.1 (2025-11-23)
 
 ### Bug Fixes
 
-- sync from javascript template ([73ee0fb](https://github.com/templ-project/typescript/commit/73ee0fb4396d0f7c8061ee830b0fd0e4e1d2e6d8))
+- sync from javascript template ([73ee0fb](https://github.com/dragoscirjan/mcp-searchable/commit/73ee0fb4396d0f7c8061ee830b0fd0e4e1d2e6d8))
 
 ## [1.0.0] - 2025-09-08
 
@@ -99,4 +99,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Troubleshooting section
 - License information (MIT)
 
-[1.0.0]: https://github.com/templ-project/javascript/releases/tag/v1.0.0
+[1.0.0]: https://github.com/dragoscirjan/mcp-searchable/releases/tag/v1.0.0

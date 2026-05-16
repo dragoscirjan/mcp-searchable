@@ -52,7 +52,7 @@ function showHelp() {
 TypeScript Template Bootstrap Tool
 
 Usage:
-  npx --yes --package=github:templ-project/typescript bootstrap [options] [path]
+  npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap [options] [path]
 
 Options:
   --part-of-monorepo        Remove .husky, .github folders and related packages
@@ -66,19 +66,19 @@ Arguments:
 
 Examples:
   # Bootstrap in current directory with all build targets
-  npx --yes --package=github:templ-project/typescript bootstrap
+  npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap
 
   # Bootstrap in specific directory
-  npx --yes --package=github:templ-project/typescript bootstrap ./my-project
+  npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap ./my-project
 
   # Bootstrap as part of monorepo (removes git hooks)
-  npx --yes --package=github:templ-project/typescript bootstrap --part-of-monorepo
+  npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap --part-of-monorepo
 
   # Bootstrap with only ESM and CJS builds
-  npx --yes --package=github:templ-project/typescript bootstrap --target esm,cjs
+  npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap --target esm,cjs
 
   # Combine options
-  npx --yes --package=github:templ-project/typescript bootstrap --part-of-monorepo --target esm ./my-lib
+  npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap --part-of-monorepo --target esm ./my-lib
 `);
 }
 
@@ -252,8 +252,8 @@ function cloneTemplate(targetPath) {
 
   try {
     // Clone the repository
-    console.log('  Cloning from https://github.com/templ-project/typescript...');
-    execSync(`git clone --depth 1 https://github.com/templ-project/typescript.git "${targetPath}"`, {
+    console.log('  Cloning from https://github.com/dragoscirjan/mcp-searchable...');
+    execSync(`git clone --depth 1 https://github.com/dragoscirjan/mcp-searchable.git "${targetPath}"`, {
       stdio: 'pipe',
     });
     console.log(`  ✓ Template cloned to ${targetPath}`);
@@ -263,7 +263,7 @@ function cloneTemplate(targetPath) {
     console.error('\nPlease ensure:');
     console.error('  1. Git is installed and available in PATH');
     console.error('  2. You have internet connectivity');
-    console.error('  3. You have access to https://github.com/templ-project/typescript');
+    console.error('  3. You have access to https://github.com/dragoscirjan/mcp-searchable');
     process.exit(1);
   }
 }

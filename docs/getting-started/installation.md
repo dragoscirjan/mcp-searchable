@@ -25,7 +25,7 @@ npx -y @dragoscirjan/mcp-searchable
 ## Install from source
 
 ```bash
-git clone https://github.com/templ-project/typescript.git mcp-searchable
+git clone https://github.com/dragoscirjan/mcp-searchable.git mcp-searchable
 cd mcp-searchable
 npm install
 uv sync

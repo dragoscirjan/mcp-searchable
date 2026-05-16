@@ -1,8 +1,8 @@
 # TypeScript Bootstrap Template
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js CI](https://github.com/templ-project/typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/templ-project/typescript/actions/workflows/ci.yml)
-[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/templ-project/typescript/issues)
+[![Node.js CI](https://github.com/dragoscirjan/mcp-searchable/actions/workflows/ci.yml/badge.svg)](https://github.com/dragoscirjan/mcp-searchable/actions/workflows/ci.yml)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dragoscirjan/mcp-searchable/issues)
 
 > A modern TypeScript project template with ESM, testing, linting, and quality tools built-in.
 
@@ -31,7 +31,7 @@
 **Bootstrap a new project:**
 
 ```bash
-npx --yes --package=github:templ-project/typescript bootstrap ./my-project
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap ./my-project
 cd my-project
 npm install
 npm test
@@ -74,13 +74,13 @@ You can copy `.env.example` and fill in your provider keys.
 
 ```bash
 # Bootstrap with only ESM and CJS builds (no browser builds)
-npx --yes --package=github:templ-project/typescript bootstrap --target esm,cjs ./my-project
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap --target esm,cjs ./my-project
 
 # Bootstrap as part of a monorepo (removes .husky, .github)
-npx --yes --package=github:templ-project/typescript bootstrap --part-of-monorepo ./packages/my-lib
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap --part-of-monorepo ./packages/my-lib
 
 # Show all available options
-npx --yes --package=github:templ-project/typescript bootstrap --help
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap --help
 ```
 
 See [.npx-install/README.md](.npx-install/README.md) for detailed bootstrap documentation.
@@ -162,7 +162,7 @@ winget install jdx.mise
 
 
 # Clone and setup
-git clone https://github.com/templ-project/typescript.git my-project
+git clone https://github.com/dragoscirjan/mcp-searchable.git my-project
 cd my-project
 
 # Install all dependencies
@@ -279,7 +279,7 @@ All configuration uses shared packages for consistency:
 
 ```typescript
 // ES Modules (recommended)
-import { hello, Greeter } from "@templ-project/typescript-template";
+import { hello, Greeter } from "@dragoscirjan/mcp-searchable-template";
 
 const greeting = hello("World");
 console.log(greeting); // "Hello, World!"
@@ -303,10 +303,10 @@ The GitHub Actions pipeline runs on **Linux, macOS, and Windows**:
 
 ## License
 
-MIT © [Templ Project](https://github.com/templ-project)
+MIT © [Dragos Cirjan](https://github.com/dragoscirjan)
 
 ## Support
 
-- [Report Issues](https://github.com/templ-project/typescript/issues)
-- [Read the Docs](https://github.com/templ-project/typescript#readme)
-- [Star on GitHub](https://github.com/templ-project/typescript)
+- [Report Issues](https://github.com/dragoscirjan/mcp-searchable/issues)
+- [Read the Docs](https://github.com/dragoscirjan/mcp-searchable#readme)
+- [Star on GitHub](https://github.com/dragoscirjan/mcp-searchable)

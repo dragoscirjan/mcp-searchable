@@ -38,7 +38,7 @@ jobs:
         shell: bash
         run: |
           # Get name from package.json
-          NAME=$(mise exec -- node -p "require('./package.json').name.replace('@templ-project/', '')")
+          NAME=$(mise exec -- node -p "require('./package.json').name.replace('@dragoscirjan/', '')")
 
           # Get version from package.json
           VERSION=$(mise exec -- node -p "require('./package.json').version")

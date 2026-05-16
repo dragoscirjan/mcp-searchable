@@ -9,7 +9,7 @@ This directory contains the bootstrap script for setting up new projects from th
 Bootstrap a new project in the current directory:
 
 ```bash
-npx --yes --package=github:templ-project/typescript bootstrap
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap
 ```
 
 ### Options
@@ -25,7 +25,7 @@ Use this flag when adding this template as part of a monorepo. This will:
 - Remove `lint-staged` configuration
 
 ```bash
-npx --yes --package=github:templ-project/typescript bootstrap --part-of-monorepo
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap --part-of-monorepo
 ```
 
 #### `--target <targets>`
@@ -44,10 +44,10 @@ Multiple targets can be specified as comma-separated values:
 
 ```bash
 # Keep only ESM and CJS builds
-npx --yes --package=github:templ-project/typescript bootstrap --target esm,cjs
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap --target esm,cjs
 
 # Keep only browser builds
-npx --yes --package=github:templ-project/typescript bootstrap --target browser,iife
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap --target browser,iife
 ```
 
 #### Target Directory
@@ -55,7 +55,7 @@ npx --yes --package=github:templ-project/typescript bootstrap --target browser,i
 Specify a target directory as the last argument:
 
 ```bash
-npx --yes --package=github:templ-project/typescript bootstrap ./my-project
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap ./my-project
 ```
 
 ### Complete Examples
@@ -63,13 +63,13 @@ npx --yes --package=github:templ-project/typescript bootstrap ./my-project
 **Standard project in current directory:**
 
 ```bash
-npx --yes --package=github:templ-project/typescript bootstrap
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap
 ```
 
 **Monorepo package with only ESM and CJS:**
 
 ```bash
-npx --yes --package=github:templ-project/typescript bootstrap \
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap \
   --part-of-monorepo \
   --target esm,cjs \
   ./packages/my-lib
@@ -78,7 +78,7 @@ npx --yes --package=github:templ-project/typescript bootstrap \
 **Browser-only library:**
 
 ```bash
-npx --yes --package=github:templ-project/typescript bootstrap \
+npx --yes --package=github:dragoscirjan/mcp-searchable bootstrap \
   --target browser,iife \
   ./my-browser-lib
 ```
@@ -88,7 +88,7 @@ npx --yes --package=github:templ-project/typescript bootstrap \
 The bootstrap script performs the following actions:
 
 1. **Clones the Template Repository**
-   - Clones from `https://github.com/templ-project/typescript`
+   - Clones from `https://github.com/dragoscirjan/mcp-searchable`
    - Uses `--depth 1` for faster cloning
 
 2. **Removes Git History**
