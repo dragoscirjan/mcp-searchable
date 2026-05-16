@@ -45,7 +45,7 @@ jobs:
       contents: write
     with:
       runs-on: ${{ matrix.platform.runs-on }}
-      jobs: lint,test # Change to 'build,lint,test' to build before version bump
+      jobs: build,lint,test # Change to 'build,lint,test' to build before version bump
 
   # Version bump (only on main branch push, uses conventional commits)
   version-bump:
